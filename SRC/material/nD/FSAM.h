@@ -50,16 +50,16 @@ class FSAM : public NDMaterial
 public:
 
 	// Constructor
-	FSAM (int tag,              // nDMaterial tag
+	FSAM(int tag,              // nDMaterial tag
 		double RHO,             // density
-		UniaxialMaterial *s1,   // steel X
-		UniaxialMaterial *s2,   // steel Y
-		UniaxialMaterial *c1,   // concrete 1.1 - uncracked
-		UniaxialMaterial *c2,   // concrete 1.2 - uncracked
-		UniaxialMaterial *cA1,  // concrete A1 - 1st crack, 2nd crack
-		UniaxialMaterial *cA2,  // concrete A2 - 1st crack, 2nd crack
-		UniaxialMaterial *cB1,  // concrete B1 - 2nd crack
-		UniaxialMaterial *cB2,  // concrete B2 - 2nd crack
+		UniaxialMaterial* s1,   // steel X
+		UniaxialMaterial* s2,   // steel Y
+		UniaxialMaterial* c1,   // concrete 1.1 - uncracked
+		UniaxialMaterial* c2,   // concrete 1.2 - uncracked
+		UniaxialMaterial* cA1,  // concrete A1 - 1st crack, 2nd crack
+		UniaxialMaterial* cA2,  // concrete A2 - 1st crack, 2nd crack
+		UniaxialMaterial* cB1,  // concrete B1 - 2nd crack
+		UniaxialMaterial* cB2,  // concrete B2 - 2nd crack
 		double ROUX,            // Reinforcing ratio of Steel 1
 		double ROUY,			// Reinforcing ratio of Steel 2
 		double NU,				// Friction coefficient of shear aggregate interlock
@@ -67,42 +67,42 @@ public:
 
 	// Blank constructor
 	FSAM();
-	
+
 	// Destructor
-	~FSAM();				  
+	~FSAM();
 
 	double getRho(void);
 
-	int setTrialStrain(const Vector &v);
-	int setTrialStrain(const Vector &v, const Vector &r);
-	int setTrialStrainIncr(const Vector &v);
-	int setTrialStrainIncr(const Vector &v, const Vector &r);
-	const Matrix &getTangent(void);
-	const Matrix &getInitialTangent(void);
-	
-	Response *setResponse (const char **argv, int argc, OPS_Stream &theOutputStream);
-	int getResponse (int responseID, Information &matInformation);
+	int setTrialStrain(const Vector& v);
+	int setTrialStrain(const Vector& v, const Vector& r);
+	int setTrialStrainIncr(const Vector& v);
+	int setTrialStrainIncr(const Vector& v, const Vector& r);
+	const Matrix& getTangent(void);
+	const Matrix& getInitialTangent(void);
+
+	Response* setResponse(const char** argv, int argc, OPS_Stream& theOutputStream);
+	int getResponse(int responseID, Information& matInformation);
 
 	int commitState(void);
 	int revertToLastCommit(void);
 	int revertToStart(void);
 
-	NDMaterial *getCopy(void);
-	NDMaterial *getCopy(const char *type);
+	NDMaterial* getCopy(void);
+	NDMaterial* getCopy(const char* type);
 
-	void Print(OPS_Stream &s, int flag = 0);
-	int sendSelf(int commitTag, Channel &theChannel);
-	int recvSelf(int commitTag, Channel &theChannel, FEM_ObjectBroker &theBroker);
+	void Print(OPS_Stream& s, int flag = 0);
+	int sendSelf(int commitTag, Channel& theChannel);
+	int recvSelf(int commitTag, Channel& theChannel, FEM_ObjectBroker& theBroker);
 
-	const char *getType(void) const { return "PlaneStress"; };
-	int getOrder(void) const { return 3;};
+	const char* getType(void) const { return "PlaneStress"; };
+	int getOrder(void) const { return 3; };
 
 	// Functions used for recorders
-	const Vector &getStress(void);
-	const Vector &getStrain(void);
+	const Vector& getStress(void);
+	const Vector& getStrain(void);
 
-	const Vector &getCommittedStress(void); 
-	const Vector &getCommittedStrain(void);  
+	const Vector& getCommittedStress(void);
+	const Vector& getCommittedStrain(void);
 
 protected:
 
@@ -112,19 +112,19 @@ private:
 	int determineTrialStressAndTangent(void);
 
 	// Stages of panel constitutive behavior
-	void Stage1(double &ex, double &ey, double &gamma); // Uncracked behavior
-	void Stage2(double &ex, double &ey, double &gamma); // 1st Crack Formed
-	void Stage3(double &ex, double &ey, double &gamma); // 2nd Crack Formed
+	void Stage1(double& ex, double& ey, double& gamma); // Uncracked behavior
+	void Stage2(double& ex, double& ey, double& gamma); // 1st Crack Formed
+	void Stage3(double& ex, double& ey, double& gamma); // 2nd Crack Formed
 
 	// Additional constitive functions
-	void betaf4(double &eo, double &epc, double &fc, double &epscmax); // biaxial damage
-	void InterLocker_improved(double &e_cr_normal, double &f_cr_normal, double &e_cr_parallel, double &e_cr_parallel_old, double &epc, double &Ec, double &Tau_Interlock_old); // shear aggregate interlock
-	void dowel_action(double &gama, double &Es); // reinforcement dowel action
+	void betaf4(double& eo, double& epc, double& fc, double& epscmax); // biaxial damage
+	void InterLocker_improved(double& e_cr_normal, double& f_cr_normal, double& e_cr_parallel, double& e_cr_parallel_old, double& epc, double& Ec, double& Tau_Interlock_old); // shear aggregate interlock
+	void dowel_action(double& gama, double& Es); // reinforcement dowel action
 	Vector getInputParameters(void); // return input parameters
 
 	// Pointers to material arrays
-	UniaxialMaterial **theMaterial; // pointer of the materials 
-	Response **theResponses;		// pointer to material responses needed for Concrete
+	UniaxialMaterial** theMaterial; // pointer of the materials 
+	Response** theResponses;		// pointer to material responses needed for Concrete
 
 	// Input variables
 	double   rho;					// density
@@ -143,11 +143,14 @@ private:
 	double   alfadow;				// stiffness Coefficient of Dowel Action 
 	Vector ConcreteInput;			// vector for storing concrete input variables
 
+	int CrackingCriteria;			// 1 - strain based (original), 2 - stress based (flexible) 
+	int crackBcriteria;
+
 	// Biaxial Damage Parameters ......................
 	// Variables for getting value from betaf4 function
 	double beta;
 	double delbeta;
-	double epsiloncmax; 
+	double epsiloncmax;
 
 	double Tepscmax1;
 	double Tepscmax2;
@@ -173,17 +176,17 @@ private:
 	// Interlock Stress
 	double Ttau_Interlock_A;
 	double Ttau_Interlock_B;
-	double Ctau_Interlock_A; 
-	double Ctau_Interlock_B; 
+	double Ctau_Interlock_A;
+	double Ctau_Interlock_B;
 
 	// Crack Slip
-	double TeA12; 
-	double TeB12; 
-	double CeA12; 
-	double CeB12; 
+	double TeA12;
+	double TeB12;
+	double CeA12;
+	double CeB12;
 
 	// for 2nd crack criteria
-	double TepsA2; 
+	double TepsA2;
 	double CepsA2;
 
 	// Dowel Action .....................................
@@ -194,7 +197,7 @@ private:
 	// State Variables ..................................
 	int crackA;
 	int crackB;
-	
+
 	// Current ..........................................
 	Vector strain_vec; // Strain
 	Vector stress_vec; // Stress
@@ -216,7 +219,7 @@ private:
 	Vector   CStress;  // Committed stesses
 	Vector   CStrain;  // Committed strain
 
-	static constexpr double pi = 3.1415926535; 
+	const double pi;
 
 	// For recorders ....................................
 	// Variables
@@ -226,19 +229,19 @@ private:
 	Vector TStrainStressSteel2;
 	Vector TStrainStressConc1;
 	Vector TStrainStressConc2;
-	Vector TStrainStressInterlock1; 
+	Vector TStrainStressInterlock1;
 	Vector TStrainStressInterlock2;
-	
+
 	Vector CPanelConcStress;
 	Vector CPanelSteelStress;
 	Vector CStrainStressSteel1;
 	Vector CStrainStressSteel2;
 	Vector CStrainStressConc1;
 	Vector CStrainStressConc2;
-	Vector CStrainStressInterlock1; 
+	Vector CStrainStressInterlock1;
 	Vector CStrainStressInterlock2;
 	Vector CCrackingAngles;
-	
+
 	// Functions
 	Vector getPanelStressConcrete(void);
 	Vector getPanelStressSteel(void);
