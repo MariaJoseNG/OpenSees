@@ -535,6 +535,7 @@ ELE_LIBS   =  $(FE)/element/Element.o \
 	$(FE)/element/dispBeamColumnInt/LinearCrdTransf2dInt.o \
 	$(FE)/element/elasticBeamColumn/ElasticBeam2d.o \
 	$(FE)/element/elasticBeamColumn/ModElasticBeam2d.o \
+	$(FE)/element/elasticBeamColumn/ModElasticBeam3d.o \
 	$(FE)/element/elasticBeamColumn/ElasticBeam3d.o \
 	$(FE)/element/elasticBeamColumn/ElasticBeamWarping3d.o \
 	$(FE)/element/elasticBeamColumn/ElasticTimoshenkoBeam2d.o \
@@ -1151,8 +1152,9 @@ SECTION_LIBS = $(FE)/material/section/SectionForceDeformation.o \
 	$(FE)/material/section/yieldSurface/YS_Section2D01.o \
 	$(FE)/material/section/yieldSurface/YS_Section2D02.o \
 	$(FE)/material/section/yieldSurface/SoilFootingSection2d.o \
-	$(FE)/material/section/ReinforcedConcreteLayerMembraneSection/ReinforcedConcreteLayerMembraneSection01.o \
-	$(FE)/material/section/ReinforcedConcreteLayerMembraneSection/ReinforcedConcreteLayerMembraneSection02.o
+	$(FE)/material/section/LayeredMembraneSection/ReinforcedConcreteLayeredMembraneSection.o \
+	$(FE)/material/section/LayeredMembraneSection/LayeredMembraneSection.o \
+	$(FE)/material/section/LayeredMembraneSection/ElasticMembraneSection.o
 
 
 SUPER_LU_OBJ = $(FE)/system_of_eqn/linearSOE/sparseGEN/SuperLU.o 

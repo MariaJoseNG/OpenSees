@@ -357,8 +357,9 @@
 
 #define SEC_TAG_MCFTFiberSection2d 7601
 
-#define SEC_TAG_ReinforcedConcreteLayerMembraneSection01 7701 // M. J. Nunez - UChile
-#define SEC_TAG_ReinforcedConcreteLayerMembraneSection02 7702 // M. J. Nunez - UChile
+#define SEC_TAG_ReinforcedConcreteLayeredMembraneSection 7701 // M. J. Nunez - UChile
+#define SEC_TAG_LayeredMembraneSection 7702 // M. J. Nunez - UChile
+#define SEC_TAG_ElasticMembraneSection 7703 // M. J. Nunez - UChile
 
 #define SECTION_INTEGRATION_TAG_WideFlange 1
 #define SECTION_INTEGRATION_TAG_RC 2
@@ -619,6 +620,7 @@
 #define ELEMENT_TAGS_WrapperElement      2
 #define ELE_TAG_ElasticBeam2d            3
 #define ELE_TAG_ModElasticBeam2d         4
+#define ELE_TAG_ModElasticBeam3d         41234
 #define ELE_TAG_ElasticBeam3d            5
 #define ELE_TAG_ElasticBeamWarping3d            5001
 #define ELE_TAG_Beam2d    	         6
@@ -864,7 +866,8 @@
 #define ELE_TAG_PML2D_5                   260
 #define ELE_TAG_PML2D_12                  261
 #define ELE_TAG_PML2DVISCOUS              262
-#define ELE_TAG_MEFI                      270 // C. N. Lopez
+#define ELE_TAG_MEFI        			  270 // C. N. Lopez
+
 
 #define FRN_TAG_Coulomb            1
 #define FRN_TAG_VelDependent       2

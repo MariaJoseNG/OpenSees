@@ -141,6 +141,9 @@
     <Filter Include="damping">
       <UniqueIdentifier>{d9c89d0b-b0ee-498a-bc11-9303c8b7338b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="mefi">
+      <UniqueIdentifier>{433d184e-6963-4d36-8e44-f5345a43fc5f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\SRC\element\Element.cpp">
@@ -1059,7 +1062,9 @@
       <Filter>mvlem</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\SRC\element\mefi\MEFI.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>mefi</Filter>
+    <ClCompile Include="..\..\..\SRC\element\elasticBeamColumn\ModElasticBeam3d.cpp">
+      <Filter>elasticBeamColumn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -1862,7 +1867,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\SRC\element\mefi\MEFI.h">
-      <Filter>Header Files</Filter>
+      <Filter>mefi</Filter>
+    <ClInclude Include="..\..\..\SRC\element\elasticBeamColumn\ModElasticBeam3d.h">
+      <Filter>elasticBeamColumn</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

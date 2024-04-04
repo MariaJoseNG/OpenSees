@@ -4,7 +4,7 @@
 #                Pacific Earthquake Engineering Research Center
 #
 #==============================================================================
-#add_library(OPS_Element_mvlem OBJECT)
+#add_library(OPS_Element_mefi OBJECT)
 
 target_sources(OPS_Element
     PRIVATE
