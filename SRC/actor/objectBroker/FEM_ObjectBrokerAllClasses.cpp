@@ -380,7 +380,6 @@
 #include "mvlem/SFI_MVLEM_3D.h"	// Kristijan Kolozvari
 #include "mvlem/E_SFI_MVLEM_3D.h"	// Kristijan Kolozvari
 #include "mvlem/E_SFI.h"		// C. N. Lopez
-#include "mefi/MEFI.h"          // C. N. Lopez
 
 #include "mefi/MEFI.h"		// C. N. Lopez
 
@@ -1033,6 +1032,9 @@ FEM_ObjectBrokerAllClasses::getNewElement(int classTag)
 		
 	case ELE_TAG_E_SFI:			// C. N. Lopez
 		return new E_SFI();		// C. N. Lopez	
+
+	case ELE_TAG_MEFI:			// C. N. Lopez
+		return new MEFI();		// C. N. Lopez
 
     case ELE_TAG_BBarFourNodeQuadUP:
       return new BBarFourNodeQuadUP();			
@@ -1836,6 +1838,15 @@ FEM_ObjectBrokerAllClasses::getNewSection(int classTag)
     case SEC_TAG_Isolator2spring:
       return new Isolator2spring();
 	
+	case SEC_TAG_ReinforcedConcreteLayeredMembraneSection:
+		return new ReinforcedConcreteLayeredMembraneSection();
+
+	case SEC_TAG_LayeredMembraneSection:
+		return new LayeredMembraneSection();
+
+	case SEC_TAG_ElasticMembraneSection:
+		return new ElasticMembraneSection();
+
 	default:
 	     opserr << "FEM_ObjectBrokerAllClasses::getNewSection - ";
 	     opserr << " - no section type exists for class tag ";
